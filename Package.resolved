@@ -1,0 +1,33 @@
+{
+  "originHash" : "47a003d10dbdaae65061aa42f0a792adc43662948871d72d8e879d11d3bc336a",
+  "pins" : [
+    {
+      "identity" : "filemanagerprotocol",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Ryu0118/FileManagerProtocol",
+      "state" : {
+        "revision" : "64a9b362f9dcd933f6dad82603c2ab0ff23863fc",
+        "version" : "0.1.0"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "6a52f3251125d74daf04fcbd5e6f08a75d074382",
+        "version" : "1.8.2"
+      }
+    },
+    {
+      "identity" : "swift-interaction",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Ryu0118/swift-interaction",
+      "state" : {
+        "revision" : "a2306079edb72712e4e8b262b4d420d292200009",
+        "version" : "0.2.0"
+      }
+    }
+  ],
+  "version" : 3
+}

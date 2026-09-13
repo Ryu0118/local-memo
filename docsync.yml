@@ -1,0 +1,42 @@
+rules:
+- name: readme-cli
+  sources:
+  - Sources/LocalMemoCLI/LocalMemoCommand.swift
+  - Sources/LocalMemoCLI/CommonOptions.swift
+  - Sources/LocalMemoCLI/ExitCodeMapping.swift
+  - Sources/LocalMemoCLI/Commands/*.swift
+  doc: README.md
+  message: CLI command surface changed - update README if commands, options, exit
+    codes, or usage changed.
+  checksum: 0779adad866be5e7deba92784e4d11b62528c5da4968da34723f0eae2297a245
+- name: readme-config
+  sources:
+  - Sources/LocalMemoKit/Config/**/*.swift
+  doc: README.md
+  message: config.json schema changed - update README's config.json table.
+  checksum: f4b61b7294acac069518cb62c0e827a110962d247f9b67a722eea817ffb373c6
+- name: readme-storage
+  sources:
+  - Sources/LocalMemoKit/Storage/**/*.swift
+  - Sources/LocalMemoKit/TTL/**/*.swift
+  doc: README.md
+  message: Storage layout, path hash, or TTL/expiration behavior changed - update
+    README's Storage Layout and TTL sections.
+  checksum: a8d6b17f1e8950e087a86e2c70ffa3443310d9314cb16fe262dd6f47d10d82be
+- name: agents-project
+  sources:
+  - Package.swift
+  - Sources/LocalMemoCLI/LocalMemoCommand.swift
+  - Sources/LocalMemoKit/MemoStore.swift
+  doc: AGENTS.md
+  message: Package structure or core types changed - update the directory structure
+    table in AGENTS.md if needed.
+  checksum: 83386f10a39b43817b5bdb5b191b6edf4af0d4bc4da6287b6ac7ce677ac85663
+- name: skill-cli
+  sources:
+  - Sources/LocalMemoCLI/Commands/*.swift
+  - Sources/LocalMemoKit/Config/**/*.swift
+  doc: .agents/skills/local-memo-cli-guide/SKILL.md
+  message: CLI commands or config keys changed - update the skill guide if agent-facing
+    usage changed.
+  checksum: 3cee24fe90fc0b0a8eac7b195905c73d3c478bfb545bf1bbb7e10f3a58dbf753
