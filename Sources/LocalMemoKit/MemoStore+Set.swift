@@ -31,9 +31,14 @@ public extension MemoStore {
         let currentTime = now()
         let existingBody = reader.readBody(at: bodyURL)
         let existingMetadata = (try? reader.readMetadata(at: metadataURL)) ?? nil
-        // An expired memo is treated as absent: it neither blocks --no-overwrite nor carries
-        // its createdAt forward, since a fresh `set` after expiry is conceptually a new memo.
-        let existingIsLive = existingBody != nil && !(existingMetadata?.isExpired(asOf: currentTime) ?? false)
+        // A memo the configured policy would already treat as gone (hiddenExpired/deleteNow)
+        // is treated as absent here too: it neither blocks --no-overwrite nor carries its
+        // createdAt forward, since a fresh `set` after expiry is conceptually a new memo.
+        let existingIsLive: Bool = if existingBody != nil, let existingMetadata {
+            ExpirationPolicy.check(metadata: existingMetadata, policy: config.expiredPolicy, now: currentTime) == .alive
+        } else {
+            existingBody != nil
+        }
 
         if existingIsLive, !allowOverwrite {
             throw MemoStoreError.alreadyExists(key: rawKey)

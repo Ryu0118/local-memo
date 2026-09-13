@@ -137,4 +137,27 @@ struct MemoStoreTests {
             #expect(try store.get(key: "todo", includeExpired: false).value == "second")
         }
     }
+
+    @Test("under expired_policy keep, set --no-overwrite still treats an expired memo as live")
+    func noOverwriteRespectsKeepPolicy() async throws {
+        try await withTempDirectory { temp in
+            let root = temp.appending(path: "root")
+            let clock = TestClock()
+            let store = makeStore(root: root, project: temp.appending(path: "project"), clock: clock)
+
+            var config = LocalMemoConfig.default
+            config.expiredPolicy = .keep
+            try ConfigWriter(fileManager: FileManager.default).write(config, to: store.configURL)
+
+            _ = try store.set(key: "todo", value: "first", ttl: "1s", allowOverwrite: true)
+            clock.advance(by: 2)
+
+            #expect(throws: MemoStoreError.self) {
+                try store.set(key: "todo", value: "second", ttl: nil, allowOverwrite: false)
+            }
+            // The rejected overwrite must leave the original memo untouched.
+            let record = try store.get(key: "todo", includeExpired: true)
+            #expect(record.value == "first")
+        }
+    }
 }
