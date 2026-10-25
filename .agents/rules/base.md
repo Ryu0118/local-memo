@@ -55,3 +55,7 @@ Apply these when reviewing or refactoring code in this repo:
 - **Re-run `swift build`, `swift test`, and `make lint` after every content-changing commit**, not just at the end — the pre-commit hook (`swiftlint --strict` + my-swift-linter) will hard-block a bad commit, and it's cheaper to catch drift immediately.
 - **Check `docsync.yml` after moving or editing any file it tracks** (`docsync check` / `docsync update-checksum`) — moved source paths and edited files both invalidate its checksums, and the pre-commit hook fails the commit until resynced.
 - **Clean up untracked cruft found along the way** (e.g. stray `.DS_Store`) as part of the same pass, even if unrelated to the main task.
+
+## Documentation and code
+
+When documentation and the existing code disagree, follow the conventions used in the existing code, and in your final reply list every inconsistency you found between the documentation and the code.
